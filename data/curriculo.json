@@ -1,0 +1,66 @@
+{
+  "perfil": {
+    "nome": "Seu Nome Completo",
+    "titulo": "Estudante de Ciência da Computação · Dev Mobile",
+    "resumo": "Escreva aqui um resumo sobre você: o que estuda, o que gosta de construir e que tipo de oportunidade procura.",
+    "localizacao": "Recife, PE",
+    "email": "seu-email@exemplo.com",
+    "github": "https://github.com/seu-usuario",
+    "linkedin": "https://www.linkedin.com/in/seu-usuario",
+    "habilidades": ["React Native", "Expo", "TypeScript", "JavaScript", "Git", "HTML e CSS"],
+    "idiomas": ["Português (nativo)", "Inglês (intermediário)"]
+  },
+  "formacoes": [
+    {
+      "ordem": 1,
+      "curso": "Nome do seu curso",
+      "instituicao": "Nome da sua universidade",
+      "nivel": "Graduação",
+      "inicio": "2023",
+      "fim": "",
+      "descricao": "Disciplinas, projetos ou destaques do curso."
+    },
+    {
+      "ordem": 2,
+      "curso": "Ensino Médio",
+      "instituicao": "Nome da escola",
+      "nivel": "Ensino médio",
+      "inicio": "2019",
+      "fim": "2021",
+      "descricao": ""
+    }
+  ],
+  "experiencias": [
+    {
+      "ordem": 1,
+      "cargo": "Seu cargo",
+      "empresa": "Nome da empresa",
+      "tipo": "Estágio",
+      "inicio": "2024",
+      "fim": "",
+      "descricao": "Uma frase sobre o que você faz nessa vaga.",
+      "atividades": ["Uma atividade ou conquista", "Outra atividade ou conquista"],
+      "tecnologias": ["React Native", "TypeScript"]
+    }
+  ],
+  "projetos": [
+    {
+      "ordem": 1,
+      "nome": "App Currículo",
+      "descricao": "Este aplicativo: currículo e portfólio em React Native + Expo, com dados vindos do Back4App.",
+      "tecnologias": ["React Native", "Expo", "Back4App"],
+      "link": "",
+      "repositorio": "https://github.com/seu-usuario/curriculo-860050",
+      "destaque": true
+    },
+    {
+      "ordem": 2,
+      "nome": "Outro projeto",
+      "descricao": "Descreva o projeto, o problema que ele resolve e o seu papel nele.",
+      "tecnologias": ["JavaScript", "HTML e CSS"],
+      "link": "",
+      "repositorio": "",
+      "destaque": false
+    }
+  ]
+}

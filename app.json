@@ -2,6 +2,7 @@
   "expo": {
     "name": "curriculo-860050",
     "slug": "curriculo-860050",
+    "owner": "anacsilvabrs-team",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -32,11 +33,27 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
-      ]
+      ],
+      "expo-font",
+      "expo-image",
+      "expo-status-bar",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "56d98ed0-606a-4348-a19f-1e81bb8a6aa2"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/56d98ed0-606a-4348-a19f-1e81bb8a6aa2"
     }
   }
 }

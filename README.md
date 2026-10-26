@@ -1,56 +1,51 @@
-# Welcome to your Expo app 👋
+# Currículo / Portfólio — React Native + Expo
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+App de currículo e portfólio feito com React Native, Expo e Expo Router. Os dados (perfil, formação, experiências e projetos) vêm de um back-end no **Back4App**.
 
-## Get started
+## Telas
 
-1. Install dependencies
+| Aba | Conteúdo |
+| --- | --- |
+| Início | Apresentação, habilidades, idiomas, contatos e acesso ao mural |
+| Acadêmico | Linha do tempo da formação |
+| Profissional | Linha do tempo das experiências, com atividades e tecnologias |
+| Projetos | Portfólio com filtro por tecnologia e links |
+| Sobre | Tecnologias, módulos e funcionalidades extras do app |
+| Mural de recados | Visitantes deixam mensagens, salvas no Back4App |
+
+## Funcionalidades extras
+
+- **Mural de recados**: grava e lê mensagens na classe `Recado` do Back4App.
+- **Tema claro/escuro** trocado pelo botão no topo de cada tela.
+- **Compartilhar currículo** pelo menu de compartilhamento do celular.
+- **Filtro de projetos** por tecnologia e **puxar para atualizar** os dados do back-end.
+
+## Configurando o Back4App
+
+1. Crie um app em [back4app.com](https://www.back4app.com).
+2. Em **App Settings > Security & Keys**, copie o *Application ID* e a *REST API Key*.
+3. Copie `.env.example` para `.env.local` e cole as chaves.
+4. Edite `data/curriculo.json` com os seus dados.
+5. Envie os dados para o Back4App:
 
    ```bash
-   npm install
+   npm run seed
    ```
 
-2. Start the app
+   O comando cria as classes `Perfil`, `Formacao`, `Experiencia` e `Projeto`. Rodar de novo substitui os dados (os recados são mantidos).
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Rodando
 
 ```bash
-npm run reset-project
+npm install
+npm run go          # abre no Expo Go
+npm run goTunnel    # Expo Go via túnel (celular em outra rede)
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+## Publicando (EAS Update)
 
-### Other setup steps
+```bash
+npm run publicar
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+O `.env.local` precisa existir na hora de publicar, porque as chaves entram no pacote do app.
