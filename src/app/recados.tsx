@@ -1,28 +1,18 @@
-import { useCallback, useEffect, useState } from 'react';
-import {
-  ActivityIndicator,
-  KeyboardAvoidingView,
-  Platform,
-  RefreshControl,
-  ScrollView,
-  StyleSheet,
-  TextInput,
-  View,
-} from 'react-native';
+import { useState } from 'react';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AppText } from '@/components/app-text';
 import { Vazio } from '@/components/empty';
 import { Button, Card, SectionTitle } from '@/components/ui';
 import { Fonts, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
-import { criar, listar } from '@/lib/back4app';
+import { recados } from '@/lib/recados';
 import type { Recado } from '@/lib/types';
 import { useAppTheme } from '@/providers/theme-provider';
 
 const LIMITE_MENSAGEM = 280;
 
-function quando(data?: string) {
-  if (!data) return '';
+function quando(data: string) {
   return new Date(data).toLocaleString('pt-BR', {
     day: '2-digit',
     month: 'short',
@@ -34,57 +24,22 @@ function quando(data?: string) {
 export default function RecadosScreen() {
   const { colors } = useAppTheme();
   const insets = useSafeAreaInsets();
-  const [recados, setRecados] = useState<Recado[]>([]);
-  const [carregando, setCarregando] = useState(true);
-  const [atualizando, setAtualizando] = useState(false);
-  const [erro, setErro] = useState<string | null>(null);
+  const [lista, setLista] = useState(() => [...recados]);
   const [nome, setNome] = useState('');
   const [mensagem, setMensagem] = useState('');
-  const [enviando, setEnviando] = useState(false);
   const [aviso, setAviso] = useState<string | null>(null);
 
-  const carregar = useCallback(
-    () =>
-      listar<Recado>('Recado', { order: '-createdAt', limit: 50 })
-        .then(
-          (lista) => {
-            setRecados(lista);
-            setErro(null);
-          },
-          (e) => setErro(e instanceof Error ? e.message : 'Erro ao carregar recados.')
-        )
-        .finally(() => setCarregando(false)),
-    []
-  );
-
-  useEffect(() => {
-    carregar();
-  }, [carregar]);
-
-  const atualizar = async () => {
-    setAtualizando(true);
-    await carregar();
-    setAtualizando(false);
-  };
-
-  const enviar = async () => {
+  const enviar = () => {
     const dados = { nome: nome.trim(), mensagem: mensagem.trim() };
     if (!dados.nome || !dados.mensagem) {
       setAviso('Preencha seu nome e a mensagem.');
       return;
     }
-    setEnviando(true);
-    setAviso(null);
-    try {
-      const { objectId, createdAt } = await criar('Recado', dados);
-      setRecados((atual) => [{ ...dados, objectId, createdAt }, ...atual]);
-      setMensagem('');
-      setAviso('Recado enviado! Obrigado. 💜');
-    } catch (e) {
-      setAviso(e instanceof Error ? e.message : 'Não foi possível enviar.');
-    } finally {
-      setEnviando(false);
-    }
+    const novo: Recado = { ...dados, id: `recado-${Date.now()}`, criadoEm: new Date().toISOString() };
+    recados.unshift(novo);
+    setLista([...recados]);
+    setMensagem('');
+    setAviso('Recado enviado! Obrigado. 💜');
   };
 
   const inputStyle = [
@@ -99,18 +54,10 @@ export default function RecadosScreen() {
       keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}>
       <ScrollView
         keyboardShouldPersistTaps="handled"
-        contentContainerStyle={[styles.content, { paddingBottom: insets.bottom + Spacing.xxl }]}
-        refreshControl={
-          <RefreshControl
-            refreshing={atualizando}
-            onRefresh={atualizar}
-            tintColor={colors.primary}
-            colors={[colors.primary]}
-          />
-        }>
+        contentContainerStyle={[styles.content, { paddingBottom: insets.bottom + Spacing.xxl }]}>
         <View style={styles.inner}>
           <AppText color="textMuted">
-            Deixe uma mensagem, um feedback ou só um oi. Os recados ficam salvos no Back4App.
+            Deixe uma mensagem, um feedback ou só um oi.
           </AppText>
 
           <Card>
@@ -139,20 +86,13 @@ export default function RecadosScreen() {
                 {aviso}
               </AppText>
             )}
-            <Button
-              label={enviando ? 'Enviando…' : 'Enviar recado'}
-              icon="enviar"
-              onPress={enviar}
-              disabled={enviando}
-            />
+            <Button label="Enviar recado" icon="enviar" onPress={enviar} />
           </Card>
 
-          <SectionTitle>{`Recados (${recados.length})`}</SectionTitle>
-          {carregando && <ActivityIndicator color={colors.primary} />}
-          {erro && <Vazio texto={erro} />}
-          {!carregando && !erro && recados.length === 0 && <Vazio texto="Seja a primeira pessoa a deixar um recado!" />}
-          {recados.map((r) => (
-            <Card key={r.objectId}>
+          <SectionTitle>{`Recados (${lista.length})`}</SectionTitle>
+          {lista.length === 0 && <Vazio texto="Seja a primeira pessoa a deixar um recado!" />}
+          {lista.map((r) => (
+            <Card key={r.id}>
               <View style={styles.cabecalho}>
                 <View style={[styles.avatar, { backgroundColor: colors.primarySoft }]}>
                   <AppText variant="bodyStrong" color="primary">
@@ -162,7 +102,7 @@ export default function RecadosScreen() {
                 <View style={styles.flex}>
                   <AppText variant="bodyStrong">{r.nome}</AppText>
                   <AppText variant="caption" color="textMuted">
-                    {quando(r.createdAt)}
+                    {quando(r.criadoEm)}
                   </AppText>
                 </View>
               </View>

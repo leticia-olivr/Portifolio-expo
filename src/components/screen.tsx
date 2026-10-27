@@ -1,12 +1,10 @@
 import type { ReactNode } from 'react';
-import { ActivityIndicator, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AppText } from '@/components/app-text';
-import { Icon } from '@/components/icon';
-import { Button, IconButton } from '@/components/ui';
+import { IconButton } from '@/components/ui';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
-import { useCurriculo } from '@/providers/curriculo-provider';
 import { useAppTheme } from '@/providers/theme-provider';
 
 type Props = {
@@ -14,38 +12,12 @@ type Props = {
   title?: string;
   subtitle?: string;
   actions?: ReactNode;
-  // Telas que dependem dos dados do Back4App mostram carregando/erro no lugar do conteúdo.
-  precisaDados?: boolean;
   children: ReactNode;
 };
 
-export function Screen({ eyebrow, title, subtitle, actions, precisaDados = true, children }: Props) {
+export function Screen({ eyebrow, title, subtitle, actions, children }: Props) {
   const { colors, scheme, alternarTema } = useAppTheme();
-  const { status, erro, atualizando, recarregar } = useCurriculo();
   const insets = useSafeAreaInsets();
-
-  let conteudo = children;
-  if (precisaDados && status === 'carregando') {
-    conteudo = (
-      <View style={styles.estado}>
-        <ActivityIndicator color={colors.primary} size="large" />
-        <AppText color="textMuted">Buscando dados no Back4App…</AppText>
-      </View>
-    );
-  } else if (precisaDados && status === 'erro') {
-    conteudo = (
-      <View style={styles.estado}>
-        <Icon name="alerta" size={32} color={colors.accent} />
-        <AppText variant="heading" style={styles.centro}>
-          Não foi possível carregar o currículo
-        </AppText>
-        <AppText color="textMuted" style={styles.centro}>
-          {erro}
-        </AppText>
-        <Button label="Tentar de novo" icon="recarregar" onPress={recarregar} />
-      </View>
-    );
-  }
 
   return (
     <ScrollView
@@ -53,15 +25,7 @@ export function Screen({ eyebrow, title, subtitle, actions, precisaDados = true,
       contentContainerStyle={[
         styles.content,
         { paddingTop: insets.top + Spacing.lg, paddingBottom: insets.bottom + Spacing.xxl },
-      ]}
-      refreshControl={
-        <RefreshControl
-          refreshing={atualizando}
-          onRefresh={recarregar}
-          tintColor={colors.primary}
-          colors={[colors.primary]}
-        />
-      }>
+      ]}>
       <View style={styles.inner}>
         <View style={styles.header}>
           <View style={styles.headerText}>
@@ -82,7 +46,7 @@ export function Screen({ eyebrow, title, subtitle, actions, precisaDados = true,
           </View>
         </View>
         {subtitle && <AppText color="textMuted">{subtitle}</AppText>}
-        {conteudo}
+        {children}
       </View>
     </ScrollView>
   );
@@ -94,12 +58,4 @@ const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'flex-start', gap: Spacing.md },
   headerText: { flex: 1, gap: Spacing.xs },
   actions: { flexDirection: 'row', gap: Spacing.sm },
-  estado: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: Spacing.md,
-    paddingVertical: Spacing.xxl * 2,
-    paddingHorizontal: Spacing.lg,
-  },
-  centro: { textAlign: 'center' },
 });

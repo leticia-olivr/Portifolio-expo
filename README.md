@@ -1,6 +1,6 @@
 # Currículo / Portfólio — React Native + Expo
 
-App de currículo e portfólio feito com React Native, Expo e Expo Router. Os dados (perfil, formação, experiências e projetos) vêm de um back-end no **Back4App**.
+App de currículo e portfólio feito com React Native, Expo e Expo Router. Não usa banco de dados nem servidor: todo o conteúdo fica no arquivo `data/curriculo.json`, que vai junto no app.
 
 ## Telas
 
@@ -10,34 +10,25 @@ App de currículo e portfólio feito com React Native, Expo e Expo Router. Os da
 | Acadêmico | Linha do tempo da formação |
 | Profissional | Linha do tempo das experiências, com atividades e tecnologias |
 | Projetos | Portfólio com filtro por tecnologia e links |
-| Sobre | Tecnologias, módulos e funcionalidades extras do app |
-| Mural de recados | Visitantes deixam mensagens, salvas no Back4App |
+| Mural de recados | Visitantes deixam mensagens (só de demonstração, veja abaixo) |
 
 ## Funcionalidades extras
 
-- **Mural de recados**: grava e lê mensagens na classe `Recado` do Back4App.
+- **Mural de recados**: os recados aparecem na hora, mas ficam só na memória do aparelho e somem quando o app é fechado. Os recados de exemplo estão em `src/lib/recados.ts`.
 - **Tema claro/escuro** trocado pelo botão no topo de cada tela.
 - **Compartilhar currículo** pelo menu de compartilhamento do celular.
-- **Filtro de projetos** por tecnologia e **puxar para atualizar** os dados do back-end.
+- **Filtro de projetos** por tecnologia.
+- **Navegação adaptada à web**: barra inferior no celular e menu lateral em telas largas.
 
-## Configurando o Back4App
+## Editando o currículo
 
-1. Crie um app em [back4app.com](https://www.back4app.com).
-2. Em **App Settings > Security & Keys**, copie o *Application ID* e a *REST API Key*.
-3. Copie `.env.example` para `.env.local` e cole as chaves.
-4. Edite `data/curriculo.json` com os seus dados.
-5. Envie os dados para o Back4App:
-
-   ```bash
-   npm run seed
-   ```
-
-   O comando cria as classes `Perfil`, `Formacao`, `Experiencia` e `Projeto`. Rodar de novo substitui os dados (os recados são mantidos).
+Edite `data/curriculo.json`. A ordem dos itens no arquivo é a ordem em que aparecem nas telas. Campos opcionais podem ficar vazios (`""`) ou ser removidos.
 
 ## Rodando
 
 ```bash
 npm install
+npm run web         # abre no navegador
 npm run go          # abre no Expo Go
 npm run goTunnel    # Expo Go via túnel (celular em outra rede)
 ```
@@ -48,4 +39,4 @@ npm run goTunnel    # Expo Go via túnel (celular em outra rede)
 npm run publicar
 ```
 
-O `.env.local` precisa existir na hora de publicar, porque as chaves entram no pacote do app.
+O comando publica os arquivos como estão na pasta. Faça um commit antes para a atualização ficar com uma mensagem que faça sentido (o `--auto` usa a mensagem do último commit).

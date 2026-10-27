@@ -12,7 +12,6 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 
 import { Fonts } from '@/constants/theme';
-import { CurriculoProvider } from '@/providers/curriculo-provider';
 import { AppThemeProvider, useAppTheme } from '@/providers/theme-provider';
 
 SplashScreen.preventAutoHideAsync();
@@ -35,9 +34,7 @@ export default function RootLayout() {
 
   return (
     <AppThemeProvider>
-      <CurriculoProvider>
-        <Navegacao />
-      </CurriculoProvider>
+      <Navegacao />
     </AppThemeProvider>
   );
 }

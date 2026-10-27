@@ -1,65 +1,119 @@
 {
   "perfil": {
-    "nome": "Seu Nome Completo",
+    "nome": "Mariana Alves Costa",
     "titulo": "Estudante de Ciência da Computação · Dev Mobile",
-    "resumo": "Escreva aqui um resumo sobre você: o que estuda, o que gosta de construir e que tipo de oportunidade procura.",
+    "resumo": "Sou estudante do 6º período de Ciência da Computação e apaixonada por criar apps que resolvem problemas do dia a dia. Tenho experiência com React Native, Expo e integração com APIs REST. Busco uma vaga de estágio em desenvolvimento mobile onde eu possa aprender com um time experiente e entregar produtos usados por muita gente.",
     "localizacao": "Recife, PE",
-    "email": "seu-email@exemplo.com",
-    "github": "https://github.com/seu-usuario",
-    "linkedin": "https://www.linkedin.com/in/seu-usuario",
-    "habilidades": ["React Native", "Expo", "TypeScript", "JavaScript", "Git", "HTML e CSS"],
-    "idiomas": ["Português (nativo)", "Inglês (intermediário)"]
+    "email": "mariana.costa@exemplo.com",
+    "github": "https://github.com/expo",
+    "linkedin": "https://www.linkedin.com/",
+    "habilidades": ["React Native", "Expo", "TypeScript", "JavaScript", "Node.js", "Git e GitHub", "Figma", "SQL", "Firebase", "Testes com Jest"],
+    "idiomas": ["Português (nativo)", "Inglês (avançado)", "Espanhol (básico)"]
   },
   "formacoes": [
     {
-      "ordem": 1,
-      "curso": "Nome do seu curso",
-      "instituicao": "Nome da sua universidade",
+      "curso": "Bacharelado em Ciência da Computação",
+      "instituicao": "Universidade Federal de Pernambuco",
       "nivel": "Graduação",
       "inicio": "2023",
       "fim": "",
-      "descricao": "Disciplinas, projetos ou destaques do curso."
+      "descricao": "Ênfase em engenharia de software e computação móvel. Monitora de Algoritmos e Estruturas de Dados e participante do grupo de pesquisa em IHC."
     },
     {
-      "ordem": 2,
-      "curso": "Ensino Médio",
-      "instituicao": "Nome da escola",
-      "nivel": "Ensino médio",
+      "curso": "Desenvolvimento Mobile com React Native",
+      "instituicao": "Rocketseat",
+      "nivel": "Curso livre",
+      "inicio": "2024",
+      "fim": "2024",
+      "descricao": "Navegação, consumo de APIs, armazenamento local e publicação nas lojas."
+    },
+    {
+      "curso": "Técnico em Informática para Internet",
+      "instituicao": "IFPE — Campus Recife",
+      "nivel": "Ensino técnico",
       "inicio": "2019",
-      "fim": "2021",
+      "fim": "2022",
       "descricao": ""
     }
   ],
   "experiencias": [
     {
-      "ordem": 1,
-      "cargo": "Seu cargo",
-      "empresa": "Nome da empresa",
+      "cargo": "Estagiária de Desenvolvimento Mobile",
+      "empresa": "Porto Digital Labs",
       "tipo": "Estágio",
-      "inicio": "2024",
+      "inicio": "Mar 2025",
       "fim": "",
-      "descricao": "Uma frase sobre o que você faz nessa vaga.",
-      "atividades": ["Uma atividade ou conquista", "Outra atividade ou conquista"],
-      "tecnologias": ["React Native", "TypeScript"]
+      "descricao": "Desenvolvimento do app de fidelidade de uma rede de farmácias, com mais de 50 mil usuários ativos.",
+      "atividades": [
+        "Implementei o fluxo de cadastro e login com validação de CPF e autenticação por SMS.",
+        "Reduzi em 40% o tempo de carregamento da tela inicial com cache de imagens e paginação.",
+        "Escrevi testes automatizados para os componentes principais."
+      ],
+      "tecnologias": ["React Native", "Expo", "TypeScript", "Jest"]
+    },
+    {
+      "cargo": "Desenvolvedora Front-end",
+      "empresa": "Empresa Júnior CIn",
+      "tipo": "Voluntário",
+      "inicio": "Ago 2023",
+      "fim": "Fev 2025",
+      "descricao": "Criação de sites e sistemas para pequenos negócios da região.",
+      "atividades": [
+        "Liderei o projeto do site de uma clínica veterinária, do protótipo à entrega.",
+        "Conduzi reuniões de levantamento de requisitos com clientes."
+      ],
+      "tecnologias": ["React", "JavaScript", "Figma"]
+    },
+    {
+      "cargo": "Monitora de Algoritmos",
+      "empresa": "Universidade Federal de Pernambuco",
+      "tipo": "Monitoria",
+      "inicio": "2024",
+      "fim": "2024",
+      "descricao": "",
+      "atividades": [],
+      "tecnologias": ["Python", "C"]
     }
   ],
   "projetos": [
     {
-      "ordem": 1,
       "nome": "App Currículo",
-      "descricao": "Este aplicativo: currículo e portfólio em React Native + Expo, com dados vindos do Back4App.",
-      "tecnologias": ["React Native", "Expo", "Back4App"],
-      "link": "",
-      "repositorio": "https://github.com/seu-usuario/curriculo-860050",
+      "descricao": "Este aplicativo: currículo e portfólio em React Native + Expo, publicado com EAS Update.",
+      "tecnologias": ["React Native", "Expo", "TypeScript"],
+      "link": "https://expo.dev",
+      "repositorio": "https://github.com/leticia-olivr/Portifolio-expo",
       "destaque": true
     },
     {
-      "ordem": 2,
-      "nome": "Outro projeto",
-      "descricao": "Descreva o projeto, o problema que ele resolve e o seu papel nele.",
-      "tecnologias": ["JavaScript", "HTML e CSS"],
+      "nome": "Rango Fácil",
+      "descricao": "App para estudantes dividirem as compras do mês e as receitas da semana na república. Tem lista de compras compartilhada, divisão de gastos e notificações.",
+      "tecnologias": ["React Native", "Firebase", "TypeScript"],
+      "link": "",
+      "repositorio": "https://github.com/expo/examples",
+      "destaque": true
+    },
+    {
+      "nome": "Painel de Monitoria",
+      "descricao": "Sistema web para agendar horários de monitoria e acompanhar as dúvidas mais frequentes da turma.",
+      "tecnologias": ["React", "Node.js", "SQL"],
+      "link": "https://react.dev",
+      "repositorio": "",
+      "destaque": false
+    },
+    {
+      "nome": "Bot de Avisos do Centro Acadêmico",
+      "descricao": "Bot que envia no grupo os avisos de provas e eventos do curso.",
+      "tecnologias": ["Node.js", "JavaScript"],
       "link": "",
       "repositorio": "",
+      "destaque": false
+    },
+    {
+      "nome": "Jogo da Memória Acessível",
+      "descricao": "Jogo com suporte a leitor de tela e alto contraste, feito para a disciplina de IHC.",
+      "tecnologias": ["JavaScript", "HTML e CSS"],
+      "link": "https://developer.mozilla.org",
+      "repositorio": "https://github.com/mdn",
       "destaque": false
     }
   ]

@@ -8,15 +8,13 @@ import { Icon, type IconName } from '@/components/icon';
 import { Screen } from '@/components/screen';
 import { Card, ChipList, IconButton, SectionTitle } from '@/components/ui';
 import { HeroGradient, Radius, Spacing } from '@/constants/theme';
-import { useCurriculo } from '@/providers/curriculo-provider';
+import { experiencias, formacoes, perfil, projetos } from '@/lib/curriculo';
 import { useAppTheme } from '@/providers/theme-provider';
 
 export default function HomeScreen() {
   const { colors } = useAppTheme();
-  const { perfil, formacoes, experiencias, projetos } = useCurriculo();
 
   const compartilhar = () => {
-    if (!perfil) return;
     const linhas = [
       `${perfil.nome} — ${perfil.titulo}`,
       perfil.resumo,
@@ -28,13 +26,13 @@ export default function HomeScreen() {
   };
 
   const contatos: { icon: IconName; label: string; abrir: () => void }[] = [];
-  if (perfil?.email) {
+  if (perfil.email) {
     contatos.push({ icon: 'email', label: 'E-mail', abrir: () => Linking.openURL(`mailto:${perfil.email}`) });
   }
-  if (perfil?.github) {
+  if (perfil.github) {
     contatos.push({ icon: 'codigo', label: 'GitHub', abrir: () => WebBrowser.openBrowserAsync(perfil.github!) });
   }
-  if (perfil?.linkedin) {
+  if (perfil.linkedin) {
     contatos.push({ icon: 'link', label: 'LinkedIn', abrir: () => WebBrowser.openBrowserAsync(perfil.linkedin!) });
   }
 
@@ -49,102 +47,92 @@ export default function HomeScreen() {
       eyebrow="Currículo"
       title="Olá!"
       actions={<IconButton icon="compartilhar" label="Compartilhar currículo" onPress={compartilhar} />}>
-      {perfil ? (
-        <>
-          <LinearGradient
-            colors={HeroGradient}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={styles.hero}>
-            <AppText variant="display" style={styles.heroTexto}>
-              {perfil.nome}
+      <LinearGradient
+        colors={HeroGradient}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.hero}>
+        <AppText variant="display" style={styles.heroTexto}>
+          {perfil.nome}
+        </AppText>
+        <AppText variant="bodyStrong" style={styles.heroSub}>
+          {perfil.titulo}
+        </AppText>
+        {!!perfil.localizacao && (
+          <View style={styles.local}>
+            <Icon name="local" size={14} color="rgba(255,255,255,0.85)" />
+            <AppText variant="caption" style={styles.heroSub}>
+              {perfil.localizacao}
             </AppText>
-            <AppText variant="bodyStrong" style={styles.heroSub}>
-              {perfil.titulo}
-            </AppText>
-            {!!perfil.localizacao && (
-              <View style={styles.local}>
-                <Icon name="local" size={14} color="rgba(255,255,255,0.85)" />
-                <AppText variant="caption" style={styles.heroSub}>
-                  {perfil.localizacao}
-                </AppText>
-              </View>
-            )}
-          </LinearGradient>
+          </View>
+        )}
+      </LinearGradient>
 
-          <View style={styles.numeros}>
-            {numeros.map((n) => (
-              <Card key={n.label} style={styles.numero} onPress={() => router.navigate(n.href)}>
-                <AppText variant="title" color="primary">
-                  {n.valor}
-                </AppText>
-                <AppText variant="caption" color="textMuted">
-                  {n.label}
-                </AppText>
-              </Card>
+      <View style={styles.numeros}>
+        {numeros.map((n) => (
+          <Card key={n.label} style={styles.numero} onPress={() => router.navigate(n.href)}>
+            <AppText variant="title" color="primary">
+              {n.valor}
+            </AppText>
+            <AppText variant="caption" color="textMuted">
+              {n.label}
+            </AppText>
+          </Card>
+        ))}
+      </View>
+
+      <SectionTitle>Sobre mim</SectionTitle>
+      <Card>
+        <AppText>{perfil.resumo}</AppText>
+      </Card>
+
+      {!!perfil.habilidades?.length && (
+        <>
+          <SectionTitle>Habilidades</SectionTitle>
+          <ChipList itens={perfil.habilidades} />
+        </>
+      )}
+
+      {!!perfil.idiomas?.length && (
+        <>
+          <SectionTitle>Idiomas</SectionTitle>
+          <ChipList itens={perfil.idiomas} />
+        </>
+      )}
+
+      {contatos.length > 0 && (
+        <>
+          <SectionTitle>Contato</SectionTitle>
+          <View style={styles.contatos}>
+            {contatos.map((c) => (
+              <Pressable
+                key={c.label}
+                onPress={c.abrir}
+                style={({ pressed }) => [
+                  styles.contato,
+                  { backgroundColor: colors.surface, borderColor: colors.border },
+                  pressed && { opacity: 0.7 },
+                ]}>
+                <Icon name={c.icon} size={20} color={colors.primary} />
+                <AppText variant="caption">{c.label}</AppText>
+              </Pressable>
             ))}
           </View>
-
-          <SectionTitle>Sobre mim</SectionTitle>
-          <Card>
-            <AppText>{perfil.resumo}</AppText>
-          </Card>
-
-          {!!perfil.habilidades?.length && (
-            <>
-              <SectionTitle>Habilidades</SectionTitle>
-              <ChipList itens={perfil.habilidades} />
-            </>
-          )}
-
-          {!!perfil.idiomas?.length && (
-            <>
-              <SectionTitle>Idiomas</SectionTitle>
-              <ChipList itens={perfil.idiomas} />
-            </>
-          )}
-
-          {contatos.length > 0 && (
-            <>
-              <SectionTitle>Contato</SectionTitle>
-              <View style={styles.contatos}>
-                {contatos.map((c) => (
-                  <Pressable
-                    key={c.label}
-                    onPress={c.abrir}
-                    style={({ pressed }) => [
-                      styles.contato,
-                      { backgroundColor: colors.surface, borderColor: colors.border },
-                      pressed && { opacity: 0.7 },
-                    ]}>
-                    <Icon name={c.icon} size={20} color={colors.primary} />
-                    <AppText variant="caption">{c.label}</AppText>
-                  </Pressable>
-                ))}
-              </View>
-            </>
-          )}
-
-          <Card onPress={() => router.push('/recados')} style={styles.mural}>
-            <View style={[styles.muralIcone, { backgroundColor: colors.primarySoft }]}>
-              <Icon name="recados" size={22} color={colors.primary} />
-            </View>
-            <View style={styles.muralTexto}>
-              <AppText variant="heading">Mural de recados</AppText>
-              <AppText variant="caption" color="textMuted">
-                Deixe uma mensagem — ela fica salva no Back4App.
-              </AppText>
-            </View>
-            <Icon name="seta" size={18} color={colors.textMuted} />
-          </Card>
         </>
-      ) : (
-        <Card>
-          <AppText color="textMuted">
-            Nenhum perfil cadastrado ainda. Rode o comando de seed para enviar os dados ao Back4App.
-          </AppText>
-        </Card>
       )}
+
+      <Card onPress={() => router.push('/recados')} style={styles.mural}>
+        <View style={[styles.muralIcone, { backgroundColor: colors.primarySoft }]}>
+          <Icon name="recados" size={22} color={colors.primary} />
+        </View>
+        <View style={styles.muralTexto}>
+          <AppText variant="heading">Mural de recados</AppText>
+          <AppText variant="caption" color="textMuted">
+            Deixe uma mensagem, um feedback ou só um oi.
+          </AppText>
+        </View>
+        <Icon name="seta" size={18} color={colors.textMuted} />
+      </Card>
     </Screen>
   );
 }

@@ -1,10 +1,4 @@
-type ParseObject = {
-  objectId: string;
-  createdAt?: string;
-  updatedAt?: string;
-};
-
-export type Perfil = ParseObject & {
+export type Perfil = {
   nome: string;
   titulo: string;
   resumo: string;
@@ -16,17 +10,18 @@ export type Perfil = ParseObject & {
   idiomas?: string[];
 };
 
-export type Formacao = ParseObject & {
+export type Formacao = {
+  id: string;
   instituicao: string;
   curso: string;
   nivel?: string;
   inicio: string;
   fim?: string;
   descricao?: string;
-  ordem?: number;
 };
 
-export type Experiencia = ParseObject & {
+export type Experiencia = {
+  id: string;
   empresa: string;
   cargo: string;
   tipo?: string;
@@ -35,20 +30,21 @@ export type Experiencia = ParseObject & {
   descricao?: string;
   atividades?: string[];
   tecnologias?: string[];
-  ordem?: number;
 };
 
-export type Projeto = ParseObject & {
+export type Projeto = {
+  id: string;
   nome: string;
   descricao: string;
   tecnologias?: string[];
   link?: string;
   repositorio?: string;
   destaque?: boolean;
-  ordem?: number;
 };
 
-export type Recado = ParseObject & {
+export type Recado = {
+  id: string;
   nome: string;
   mensagem: string;
+  criadoEm: string;
 };

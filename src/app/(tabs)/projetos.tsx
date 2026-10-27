@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/components/app-text';
@@ -8,18 +8,15 @@ import { Icon } from '@/components/icon';
 import { Screen } from '@/components/screen';
 import { Button, Card, Chip, ChipList } from '@/components/ui';
 import { Spacing } from '@/constants/theme';
-import { useCurriculo } from '@/providers/curriculo-provider';
+import { projetos } from '@/lib/curriculo';
 import { useAppTheme } from '@/providers/theme-provider';
+
+const tecnologias = [...new Set(projetos.flatMap((p) => p.tecnologias ?? []))].sort();
 
 export default function ProjetosScreen() {
   const { colors } = useAppTheme();
-  const { projetos } = useCurriculo();
   const [filtro, setFiltro] = useState<string | null>(null);
 
-  const tecnologias = useMemo(
-    () => [...new Set(projetos.flatMap((p) => p.tecnologias ?? []))].sort(),
-    [projetos]
-  );
   const visiveis = filtro ? projetos.filter((p) => p.tecnologias?.includes(filtro)) : projetos;
 
   return (
@@ -38,7 +35,7 @@ export default function ProjetosScreen() {
 
       {visiveis.length === 0 && <Vazio texto="Nenhum projeto encontrado." />}
       {visiveis.map((p) => (
-        <Card key={p.objectId}>
+        <Card key={p.id}>
           <View style={styles.titulo}>
             <AppText variant="heading" style={styles.nome}>
               {p.nome}
