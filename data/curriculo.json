@@ -1,7 +1,7 @@
 {
   "perfil": {
-    "nome": "Mariana Alves Costa",
-    "titulo": "Estudante de Ciência da Computação · Dev Mobile",
+    "nome": "Letícia Vitória Elias de Oliveira",
+    "titulo": "Engenheira de Software Júnior na Capgemini",
     "resumo": "Sou estudante do 6º período de Ciência da Computação e apaixonada por criar apps que resolvem problemas do dia a dia. Tenho experiência com React Native, Expo e integração com APIs REST. Busco uma vaga de estágio em desenvolvimento mobile onde eu possa aprender com um time experiente e entregar produtos usados por muita gente.",
     "localizacao": "Recife, PE",
     "email": "mariana.costa@exemplo.com",
@@ -13,7 +13,7 @@
   "formacoes": [
     {
       "curso": "Bacharelado em Ciência da Computação",
-      "instituicao": "Universidade Federal de Pernambuco",
+      "instituicao": "Universidade Católica de Pernambuco",
       "nivel": "Graduação",
       "inicio": "2023",
       "fim": "",
@@ -37,6 +37,16 @@
     }
   ],
   "experiencias": [
+    {
+      "cargo": "Engenheira de Software Júnior",
+      "empresa": "Capgemini",
+      "tipo": "",
+      "inicio": "",
+      "fim": "",
+      "descricao": "",
+      "atividades": [],
+      "tecnologias": []
+    },
     {
       "cargo": "Estagiária de Desenvolvimento Mobile",
       "empresa": "Porto Digital Labs",
